@@ -1,2 +1,2 @@
-# cd js\ tasks
+# cd js\ tasks/
 # node index.js
