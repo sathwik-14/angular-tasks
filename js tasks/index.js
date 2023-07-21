@@ -219,7 +219,6 @@ function measureDepth(arr) {
     }
   }
 
-  // Increment the depth by 1 (counting the current array)
   return maxDepth + 1;
 }
 
