@@ -133,28 +133,98 @@ console.log("\n-------------exercise 11 outputs--------------\n");
 
 const query = (array,number) => {
  
-    index=array.indexOf(number)
+    var index=array.indexOf(number)
     if (index == -1)
     console.log(number+ ' does not exist')
 else{
   
-  let nearlargest;
-  let distance = array.length
+  let nearLargestDistance=array.length;
+  let nearLargest=0;
   array.map((item)=>{
-    if (item > number && (item-number)< distance)
+    if (item > number && item > nearLargest)
     {
-      nearlargest=item
-      distance=item-number
+      itemIndex = array.indexOf(item)
+      if(itemIndex < index){
+        let distance = index-itemIndex
+        if (distance<nearLargestDistance){
+          nearLargestDistance = distance
+          nearLargest=item
+        }
+      }
+      else{
+        let distance = itemIndex-index;
+        if (distance<nearLargestDistance){
+          nearLargestDistance=distance
+          nearLargest=item
+        }
+      } 
     }
   })
+  if(nearLargest)
+  console.log(nearLargest)
+  else
+  console.log("no near largest number")
   }
-  
-
- 
-  
   }
 
-query([1,4,3,2,5,7],4)
+query([1,4,3,2,5,7],7)
 
 //----------------------------Exercise 12-------------------------------
 console.log("\n-------------exercise 12 outputs--------------\n");
+
+const persistence = (num) => {
+  function multiplyDigits(number) {
+    let result = 1;
+    while (number > 0) {
+      result *= number % 10;
+      number = Math.floor(number / 10);
+    }
+    return result;
+  }
+
+  let persistenceCount = 0;
+  while (num >= 10) {
+    num = multiplyDigits(num);
+    persistenceCount++;
+  }
+
+  return persistenceCount;
+
+}
+
+
+console.log(persistence(39))
+
+
+//----------------------------Exercise 13-------------------------------
+console.log("\n-------------exercise 13 outputs--------------\n");
+
+
+
+//----------------------------Exercise 16-------------------------------
+console.log("\n-------------exercise 16 outputs--------------\n");
+
+
+function measureDepth(arr) {
+  if (!Array.isArray(arr)) {
+    return 0;
+  }
+
+  let maxDepth = 0;
+
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      const depth = measureDepth(item);
+      maxDepth = Math.max(maxDepth, depth);
+    }
+  }
+
+  // Increment the depth by 1 (counting the current array)
+  return maxDepth + 1;
+}
+
+// Test cases
+console.log(measureDepth([])); // Output: 1
+console.log(measureDepth([[]])); // Output: 2
+console.log(measureDepth([[[]]])); // Output: 3
+console.log(measureDepth([[[[[[[[[[[]]]]]]]]]]])); // Output: 11
